@@ -5,16 +5,17 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.edu.crud.aluno.entity.Aluno;
+import com.edu.crud.aluno.repository.AlunoRepository;
 import com.edu.crud.aluno.service.AlunoService;
 
 @Service
 public class AlunoServiceImplements implements AlunoService{
-	private Aluno alunoRepository;
+	private AlunoRepository alunoRepository;
 	
 	
 	
 	
-	public AlunoServiceImplements(Aluno alunoRepository) {
+	public AlunoServiceImplements(AlunoRepository alunoRepository) {
 		super();
 		this.alunoRepository = alunoRepository;
 	}
@@ -40,7 +41,24 @@ public class AlunoServiceImplements implements AlunoService{
 	@Override
 	public Aluno getAlunoById(Long id) {
 		// TODO Auto-generated method stub
-		return (Aluno) alunoRepository.findById(id); 
+		return alunoRepository.findById(id).get(); 
+	}
+
+
+
+	@Override
+	public Aluno atualizarAluno(Aluno aluno) {
+		// TODO Auto-generated method stub
+		return alunoRepository.save(aluno);
+	}
+
+
+
+	@Override
+	public void excluirAlunoById(Long id) {
+		// TODO Auto-generated method stub
+		alunoRepository.deleteById(id);
+		
 	}
 	
 }

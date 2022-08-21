@@ -12,5 +12,7 @@ public interface AlunoService {
 
 	Aluno getAlunoById(Long id);
 	
-
+	Aluno atualizarAluno(Aluno aluno);
+	
+	void excluirAlunoById(Long id);
 }

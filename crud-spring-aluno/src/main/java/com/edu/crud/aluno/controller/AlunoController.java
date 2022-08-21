@@ -25,7 +25,7 @@ public class AlunoController {
 	}
 	
 	@GetMapping("/alunos")
-	public String listrAlunos(Model model) {
+	public String listarAlunos(Model model) {
 	 model.addAttribute("alunos", alunoService.getAllAlunos());
 	 return "aluno.html";
 	}
@@ -44,10 +44,29 @@ public class AlunoController {
 		return "redirect:/alunos.html";
 	}
 	
-	@GetMapping("/alunos/editar{id}")
+	@GetMapping("/alunos/editar/{id}")
 	public String editarAlunoViaForm(@PathVariable Long id, Model model) {
-	
 		model.addAttribute("aluno", alunoService.getAlunoById(id));
 		return "atualizaAluno.html";
 	}
+	
+	@PostMapping("alunos/{id}")
+	public String atuliazarAluno(@PathVariable long id, @ModelAttribute("aluno") Aluno aluno, Model model) {
+		Aluno existenciaDeAluo = alunoService.getAlunoById(id);
+		existenciaDeAluo.setId(id);
+		existenciaDeAluo.setNome(aluno.getNome());
+		existenciaDeAluo.setSobreNome(aluno.getSobreNome());
+		existenciaDeAluo.setIdade(aluno.getIdade());
+		existenciaDeAluo.setEmail(aluno.getEmail());
+		
+		alunoService.atualizarAluno(existenciaDeAluo);
+		return "redirect:/alunos";
+	}
+	
+	@GetMapping("/alunos/excluir/{id}")
+	public String excluirAlunoViaForm(@PathVariable Long id) {
+		alunoService.excluirAlunoById(id);
+		return "redirect:/alunos.html";
+	}
+	
 }
