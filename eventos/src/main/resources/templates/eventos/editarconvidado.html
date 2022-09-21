@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<meta charset="UTF-8">
+<title>Eventos</title>
+</head>
+<body>
+	<div th:replace="~{menu :: menu}"></div>
+
+	<div class="container">
+		<h1>Editar Convidado</h1>
+
+		<form action="/convidado" method="post">
+			<div>
+				<input type="hidden" name="id" th:value="${convidado.id}"
+					readonly="readonly" /> <label>Nome:</label> <input type="text"
+					name="nome" th:value="${convidado.id}" /> <label>Local:</label> <input
+					type="text" name="local" th:value="${convidado.nome}" /> <label>Data:</label><input
+					type="text" name="data" th:value="${convidado.rg}" />
+
+			</div>
+			<div>
+				<button type="submit" class="waves-effect waves-light btn">Salvar</button>
+				<button type="reset" class="waves-effect waves-light btn">Limpar</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>
